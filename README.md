@@ -1,2 +1,2 @@
-# Postflop-Organizer-BE
-Back End Postflop Organizer
+# PostflopManager
+Poker postflop study organizer
