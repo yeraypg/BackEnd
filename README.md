@@ -57,14 +57,14 @@ DELETE | /user/:ID        | YES   | A   | Delete user by ID        |            
   
 METHOD | ENDPOINT         | TOKEN | ROL | DESCRIPTION              | POST PARAMS                                     | RETURNS
 -------|------------------|-------|-----|--------------------------|-------------------------------------------------|--------------------
-GET    | /team            | YES   | U   | View all teams           | -                                               | List of all teams 
-GET    | /team/:ID        | YES   | U   | View one team by ID      | -                                               | team data
-PUT    | /team/profile    | YES   | TL  | Update own user team     | name                                            | Updated team name
-PUT    | /team/:ID        | YES   | O   | Update one team by ID    | name                                            | Updated team name
-PATCH  | /team/addplayer  | YES   | TL  | add player to team       | userID                                          | Updated team
-PATCH  | /team/deleteplayer | YES | TL  | delete player from team  | userID                                          | Updated team
-DELETE | /team/profile    | YES   | TL  | Delete own team          |                                                 | Team deletion confirmation
-DELETE | /team/:ID        | YES   | O   | Delete one team by ID    |                                                 | Team deletion confirmation
-POST   | /team            | YES   | U   | Create new team          | name                                            | name, players, leader 
+GET    | /spot            | YES   | U   | View all teams           | -                                               | List of all teams 
+GET    | /spot/:ID        | YES   | U   | View one team by ID      | -                                               | team data
+PUT    | /spot/profile    | YES   | S   | Update spot              |                                                 | Updated team name
+PUT    | /spot/:ID        | YES   | O   | Update one team by ID    | name                                            | Updated team name
+PATCH  | /spot/addplayer  | YES   | TL  | add player to team       | userID                                          | Updated team
+PATCH  | /spot/deleteplayer | YES | TL  | delete player from team  | userID                                          | Updated team
+DELETE | /spot/profile    | YES   | TL  | Delete own team          |                                                 | Team deletion confirmation
+DELETE | /spot/:ID        | YES   | O   | Delete one team by ID    |                                                 | Team deletion confirmation
+POST   | /spot            | YES   | U   | Create new team          | name                                            | name, players, leader 
   
 </p></details>  
