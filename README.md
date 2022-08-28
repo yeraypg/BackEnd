@@ -52,7 +52,7 @@ DELETE | /user/:ID        | YES   | A   | Delete user by ID        |            
 
   </p></details>
   
-<details><summary>🧑‍🤝‍🧑 Spot Endpoints</summary>
+<details><summary>🧑‍🤝‍📃 Spot Endpoints</summary>
 <p>  
   
 METHOD | ENDPOINT         | TOKEN | ROL | DESCRIPTION              | POST PARAMS                                     | RETURNS
