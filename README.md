@@ -1,4 +1,4 @@
-# PostflopManager
+# Postflop Organizer
 Poker postflop study organizer
 
 BackEnd API to manage poker postflop studies.  We have incorporated methods to create Spots, flops, expamples...
