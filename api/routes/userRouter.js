@@ -17,11 +17,16 @@ const {
     updateUserProfile,
     updateUserById,
     deleteUserById,    
+    upImage,
+    upAudio,
+
 } = require('../controllers/userController')
 
 router
 .post('/signup', createUser)
 .post('/login', login)
+.post('/uploadImage', upImage)
+.post('/uploadAudio', upAudio)
 
 .get('/', checkAuth, checkRolAdmin, getAllUsers)
 .get('/profile', checkAuth, userProfile)

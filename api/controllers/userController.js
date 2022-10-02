@@ -2,12 +2,12 @@ const UserModel = require('../models/userModel')
 const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
 const cloudinary = require('cloudinary').v2
-// cloudinary.config({
-//     cloud_name: process.env.CLOUDINARY_NAME,
-//     api_key: process.env.CLOUDINARY_API_KEY,
-//     api_secret: process.env.CLOUDINARY_API_SECRET,
-//     secure: true
-//   });
+cloudinary.config({
+    cloud_name: process.env.CLOUDINARY_NAME,
+    api_key: process.env.CLOUDINARY_API_KEY,
+    api_secret: process.env.CLOUDINARY_API_SECRET,
+    secure: true
+  });
 
 async function createUser(req, res){
     try {        
@@ -96,6 +96,26 @@ async function deleteUserById(req, res){
     }
 }
 
+async function upAudio(req, res) {
+    try {
+        const uploadResult = await cloudinary.uploader.upload(req.body.audio, {resource_type: "raw"})
+        res.json(uploadResult.url)
+
+    } catch (error) {
+        console.log(error)
+    }
+}
+
+async function upImage(req, res) {
+    try {
+        const uploadResult = await cloudinary.uploader.upload(req.body.image)
+        res.json(uploadResult.url)
+
+    } catch (error) {
+        console.log(error)
+    }
+}
+
 
 module.exports = {
     createUser,
@@ -105,5 +125,7 @@ module.exports = {
     userProfile,
     updateUserProfile,
     updateUserById,
-    deleteUserById,    
+    deleteUserById,
+    upImage,
+    upAudio,
 } 

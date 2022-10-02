@@ -39,16 +39,6 @@ async function deleteSpot(req, res) {
     }
 }
 
-async function upImage(req, res) {
-    try {
-        const uploadResult = await cloudinary.uploader.upload(req.body.image)
-        res.json(uploadResult.url)
-
-    } catch (error) {
-        console.log(error)
-    }
-}
-
 async function createFlop(req, res) {
     try {
         const spot = await SpotModel.findById(req.params.spotId, { __v: 0 })
@@ -65,8 +55,8 @@ async function createFlop(req, res) {
 async function showFlop(req, res) {
     try {
         const spot = await SpotModel.findById(req.params.spotId, { __v: 0 }).populate('flop')
-        flop = spot.flop.filter(e => e._id == req.body.flopId)
-        res.json(flop[0])
+        flop = spot.flop.find(e => e._id == req.body.flopId)
+        res.json(flop)
     } catch (error) {
         console.log(error)
     }
@@ -76,8 +66,7 @@ module.exports = {
     createSpot,
     showAllSpots,
     showSpot,
-    deleteSpot,
-    upImage,
+    deleteSpot,    
     createFlop,
     showFlop,
 }

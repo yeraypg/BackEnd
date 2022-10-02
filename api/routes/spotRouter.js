@@ -12,8 +12,7 @@ const {
     createSpot,
     showAllSpots,
     showSpot,    
-    deleteSpot,
-    upImage,
+    deleteSpot,    
     createFlop,
     showFlop,
 
@@ -21,7 +20,7 @@ const {
 
 router
 .post('/', checkAuth, checkRolUser, createSpot)
-.post('/upload', checkAuth, checkRolUser, upImage)
+
 
 .put('/flop/:spotId', checkAuth, checkRolUser, createFlop)
 
