@@ -1,55 +1,33 @@
 const mongoose = require('mongoose')
+const FlopModel = require('../models/flopModel')
 
-const exampleSchema = new mongoose.Schema({
-    date: Date,
-    text: {
-        type: String
-    },
-    image: String
-})
+const spotSchema = new mongoose.Schema({
 
-const flopSchema = new mongoose.Schema({
-
-    spot: {
+    author: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'spot'
+        ref: 'user'
     },
-    name: {
+    tittleSpot: {
         type: String,
         require: true
-    },
-    type: {
-        type: String,
-        enum: ['SRP','3BET','4BET','SQZ']
-    },
-    image: {
-        type: String
     },
     theory: {
         type: String
     },
     exploit: {
-        type: String
+        type: String,
     },
-    example: [exampleSchema]
-})
-
-const spotSchema = new mongoose.Schema({
-
-    user: {
+    audio: {
+        type: String,
+    },
+    flops: [flopSchema],
+    sharedUsers: [{
         type: mongoose.Schema.Types.ObjectId,
         ref: 'user'
-    },
-    name: {
-        type: String,
-        require: true
-    },
-    explain: {
-        type: String
-    },
-    flop: [flopSchema]
+    }]
 })
 
 const SpotModel = mongoose.model('spot', spotSchema)
 
 module.exports = SpotModel
+
