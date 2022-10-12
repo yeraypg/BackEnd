@@ -22,7 +22,8 @@ const userSchema = new mongoose.Schema({
     rol: {
         type: String,
         enum: ['Admin', 'Coach', 'User'],
-        default: 'User'
+        default: 'User',
+        require: true
     },
     spot: [{
         type: mongoose.Schema.Types.ObjectId,
@@ -35,13 +36,12 @@ const userSchema = new mongoose.Schema({
     active: {
         type: Boolean,
         require: true,
-        default: false,
+        default: true,
     },
     endSubscription: {
         type: Date
     }
 });
-
 const UserModel = mongoose.model('user', userSchema);
 
 module.exports = UserModel;

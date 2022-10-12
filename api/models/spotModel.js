@@ -11,6 +11,11 @@ const spotSchema = new mongoose.Schema({
         type: String,
         require: true
     },
+    type: {
+        type: String,
+        require: true,
+        enum: ['SRP', '3BET', '4BET']
+    },
     theory: {
         type: String
     },
@@ -25,7 +30,14 @@ const spotSchema = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: 'user'
     }]
-})
+},
+    {
+        timestamps: {
+            createdAt: true,
+            updatedAt: false
+        }
+    }
+)
 
 const SpotModel = mongoose.model('spot', spotSchema)
 

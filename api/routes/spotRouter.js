@@ -1,34 +1,40 @@
 const router = require('express').Router()
 
-const { 
-    checkAuth, 
-    checkRolUser, 
-    checkRolStudent,
-    checkRolCoach, 
+const {
+    checkAuth,
     checkRolAdmin,
 } = require('../utils')
 
 const {
     createSpot,
+    showAllUserSpots,
+    showSpot,
     showAllSpots,
-    showSpot,    
-    deleteSpot,    
+    showAllUserFlops,
+    showOneFlop,
+    updateSpot,
     createFlop,
-    showFlop,
+    updateFlop,
+    deleteFlop,
+    shareSpot,
+    deleteSpot,
 
 } = require('../controllers/spotController')
 
 router
-.post('/', checkAuth, checkRolUser, createSpot)
+    .post('/', checkAuth, createSpot)
+    .post('/:spotId/flop', checkAuth, createFlop)
 
+    .get('/', checkAuth, showAllUserSpots)
+    .get('/:spotId', checkAuth, showSpot)
+    .get('/', checkAuth, checkRolAdmin, showAllSpots)
+    .get('/:spotId/flops', checkAuth, showAllUserFlops)
+    .get('/:spotId/:flopId', checkAuth, showOneFlop)
 
-.put('/flop/:spotId', checkAuth, checkRolUser, createFlop)
+    .put('/:spotId', checkAuth, updateSpot)
+    .put('/:spotId/:flopId', checkAuth, updateFlop)
+    .put('/:spotId/sharedUsers', checkAuth, shareSpot)
 
-.get('/', checkAuth, checkRolAdmin, showAllSpots)
-.get('/:spotId', checkAuth, checkRolUser, showSpot)
-.get('/flop/:spotId', checkAuth, checkRolUser, showFlop)
-.delete('/:spotId', checkAuth, checkRolUser, deleteSpot)
-
-
-
+    .delete('/:spotId', checkAuth, deleteSpot)
+    .delete('/:spotId/:flopId', checkAuth, deleteFlop)
 module.exports = router

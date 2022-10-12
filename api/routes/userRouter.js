@@ -1,14 +1,11 @@
 const router = require('express').Router()
 
-const { 
-    checkAuth, 
-    checkRolUser, 
-    checkRolStudent,
-    checkRolCoach, 
-    checkRolAdmin 
+const {
+    checkAuth,
+    checkRolAdmin
 } = require('../utils')
 
-const { 
+const {
     createUser,
     login,
     getUserById,
@@ -16,26 +13,26 @@ const {
     userProfile,
     updateUserProfile,
     updateUserById,
-    deleteUserById,    
+    deleteUserById,
     upImage,
     upAudio,
 
 } = require('../controllers/userController')
 
 router
-.post('/signup', createUser)
-.post('/login', login)
-.post('/uploadImage', upImage)
-.post('/uploadAudio', upAudio)
+    .post('/signup', createUser)
+    .post('/login', login)
 
-.get('/', checkAuth, checkRolAdmin, getAllUsers)
-.get('/profile', checkAuth, userProfile)
-.get('/:id', checkAuth, checkRolAdmin, getUserById)
+    .get('/profile', checkAuth, userProfile)
+    .get('/', checkAuth, checkRolAdmin, getAllUsers)
+    .get('/:id', checkAuth, checkRolAdmin, getUserById)
 
-.put('/profile', checkAuth, updateUserProfile)
-.put('/:id', checkAuth, checkRolAdmin, updateUserById)
+    .put('/profile', checkAuth, updateUserProfile)
+    .put('/:id', checkAuth, checkRolAdmin, updateUserById)
 
-.delete('/:id', checkAuth, checkRolAdmin, deleteUserById)
+    .delete('/:id', checkAuth, checkRolAdmin, deleteUserById)
 
 
+/*   .post('/uploadImage', upImage)
+  .post('/uploadAudio', upAudio) */
 module.exports = router

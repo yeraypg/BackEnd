@@ -2,13 +2,13 @@ const UserModel = require('../models/userModel')
 const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
 const cloudinary = require('cloudinary').v2
+
 cloudinary.config({
     cloud_name: process.env.CLOUDINARY_NAME,
     api_key: process.env.CLOUDINARY_API_KEY,
     api_secret: process.env.CLOUDINARY_API_SECRET,
     secure: true
 });
-
 
 async function createUser(req, res) {
     try {
@@ -41,13 +41,7 @@ async function login(req, res) {
 }
 
 async function getUserById(req, res) {
-    try {
-        const user = await UserModel.findById(req.params.id, { __v: 0 })
-            .populate('spot', ['name'])
-        res.json(user)
-    } catch (error) {
-        console.log(error)
-    }
+
 }
 
 async function getAllUsers(req, res) {
@@ -99,11 +93,8 @@ async function deleteUserById(req, res) {
 
 async function upAudio(req, res) {
     try {
-        console.log("recibida la peticion")
-
-        //const uploadaudio = await cloudinary.uploader.upload(req.body.audio, { resource_type: "raw" })
-        //res.json(uploadResult.url)
-        res.send("recibida la peticion")
+        const uploadaudio = await cloudinary.uploader.upload(req.body.audio, { resource_type: "raw" })
+        res.json(uploadResult.url)
     } catch (error) {
         console.log(error)
     }

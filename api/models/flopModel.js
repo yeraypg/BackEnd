@@ -10,9 +10,9 @@ const flopSchema = new mongoose.Schema({
         type: String,
         require: true
     },
-    image: {
+    image: [{
         type: String
-    },
+    }],
     theory: {
         type: String
     },
@@ -23,7 +23,13 @@ const flopSchema = new mongoose.Schema({
         type: String
     },
     examples: [exampleSchema]
-})
+},
+    {
+        timestamps: {
+            createdAt: true,
+            updatedAt: false
+        }
+    })
 
 const exampleSchema = new mongoose.Schema({
     date: Date,
@@ -39,7 +45,13 @@ const exampleSchema = new mongoose.Schema({
     audio: {
         type: String
     }
-})
+},
+    {
+        timestamps: {
+            createdAt: true,
+            updatedAt: false
+        }
+    })
 
 const FlopModel = mongoose.model('flop', flopSchema)
 
