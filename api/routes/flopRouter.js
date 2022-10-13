@@ -6,8 +6,8 @@ const {
 } = require('../utils')
 
 const {
-  showAllUserFlops,
   showOneFlop,
+  showAllFlops,
   createFlop,
   updateFlop,
   deleteFlop,
@@ -15,13 +15,13 @@ const {
 
 router
 
-.post('/:spotId/flop', checkAuth, createFlop)
+.post('/', checkAuth, createFlop)
 
-.get('/:spotId/flops', checkAuth, showAllUserFlops)
-.get('/:spotId/:flopId', checkAuth, showOneFlop)
+.get('/:flopId', checkAuth, showOneFlop)
+.get('/', checkAuth, showAllFlops )
 
-.put('/:spotId/:flopId', checkAuth, updateFlop)
+.put('/:flopId', checkAuth, updateFlop)
 
-.delete('/:spotId/:flopId', checkAuth, deleteFlop)
+.delete('/:flopId', checkAuth, deleteFlop)
 
 module.exports = router

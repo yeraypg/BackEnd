@@ -1,4 +1,5 @@
 const mongoose = require('mongoose')
+const ExampleModel = require('./exampleModel')
 
 const flopSchema = new mongoose.Schema({
 
@@ -23,28 +24,6 @@ const flopSchema = new mongoose.Schema({
         type: String
     },
     examples: [exampleSchema]
-},
-    {
-        timestamps: {
-            createdAt: true,
-            updatedAt: false
-        }
-    })
-
-const exampleSchema = new mongoose.Schema({
-    date: Date,
-    text: {
-        type: String
-    },
-    imageBoard: {
-        type: String
-    },
-    imageHand: {
-        type: String
-    },
-    audio: {
-        type: String
-    }
 },
     {
         timestamps: {

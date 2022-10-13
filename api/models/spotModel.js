@@ -1,5 +1,5 @@
 const mongoose = require('mongoose')
-const FlopModel = require('../models/flopModel')
+const FlopModel = require('./flopModel')
 
 const spotSchema = new mongoose.Schema({
 
