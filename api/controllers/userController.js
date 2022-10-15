@@ -2,7 +2,7 @@ const UserModel = require('../models/userModel')
 const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
 
-async function createUser(req, res) {
+async function singup(req, res) {
     try {
         req.body.password = bcrypt.hashSync(req.body.password, 10)
         const user = await UserModel.create(req.body)
@@ -33,6 +33,12 @@ async function login(req, res) {
 }
 
 async function getUserById(req, res) {
+    try {
+        const user = await UserModel.findById(req.params.id)
+        res.json(user)
+    } catch (error) {
+        console.log(error)
+    }
 
 }
 
@@ -84,12 +90,12 @@ async function deleteUserById(req, res) {
 }
 
 module.exports = {
-    createUser,
+    singup,
     login,
     getUserById,
     getAllUsers,
     userProfile,
-    updateUserProfile,
     updateUserById,
+    updateUserProfile,    
     deleteUserById,
 }

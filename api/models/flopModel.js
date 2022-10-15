@@ -1,6 +1,8 @@
 const mongoose = require('mongoose')
 const ExampleModel = require('./exampleModel')
 
+const exampleSchema = new ExampleModel;
+
 const flopSchema = new mongoose.Schema({
 
     spot: {
@@ -23,7 +25,7 @@ const flopSchema = new mongoose.Schema({
     audio: {
         type: String
     },
-    examples: [exampleSchema]
+    examples: [exampleSchema],
 },
     {
         timestamps: {

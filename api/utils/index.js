@@ -14,7 +14,7 @@ async function checkAuth(req, res, next) {
     else {
         try {
             const decodedToken = jwt.verify(req.headers.token, process.env.SECRET)
-            res.locals.user = await userModel.findOne({ email: decodedToken.email })
+            res.locals.user = await UserModel.findOne({ email: decodedToken.email })
             next()
         } catch (error) {
             console.log(error)
@@ -29,7 +29,6 @@ function checkRolAdmin(req, res, next) {
     }
     return next();
 }
-
 
 function checkRolCoach(req, res, next) {
     if (res.locals.user.rol !== 'Coach') {

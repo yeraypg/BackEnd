@@ -7,18 +7,18 @@ const {
 
 const {
     createSpot,
-    showSpot,
+    showOneSpot,
     showAllSpots,
+    deleteSpot,
     updateSpot,
     shareSpot,
-    deleteSpot,
 
 } = require('../controllers/spotController')
 
 router
     .post('/', checkAuth, createSpot)
 
-    .get('/:spotId', checkAuth, showSpot)
+    .get('/:spotId', checkAuth, showOneSpot)
     .get('/', checkAuth, showAllSpots)
 
     .put('/:spotId', checkAuth, updateSpot)

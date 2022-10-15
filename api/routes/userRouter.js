@@ -6,21 +6,19 @@ const {
 } = require('../utils')
 
 const {
-    createUser,
+    singup,
     login,
     getUserById,
     getAllUsers,
     userProfile,
-    updateUserProfile,
     updateUserById,
-    deleteUserById,
-    upImage,
-    upAudio,
+    updateUserProfile,    
+    deleteUserById,    
 
 } = require('../controllers/userController')
 
 router
-    .post('/signup', createUser)
+    .post('/signup', singup)
     .post('/login', login)
 
     .get('/profile', checkAuth, userProfile)
@@ -32,7 +30,4 @@ router
 
     .delete('/:id', checkAuth, checkRolAdmin, deleteUserById)
 
-
-/*   .post('/uploadImage', upImage)
-  .post('/uploadAudio', upAudio) */
 module.exports = router
