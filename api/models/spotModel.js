@@ -28,7 +28,7 @@ const flopSchema = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: 'spot'
     },
-    tittleFlop: {
+    titleFlop: {
         type: String,
         require: true
     },
@@ -52,14 +52,14 @@ const flopSchema = new mongoose.Schema({
             updatedAt: false
         }
     });
- 
+
 const spotSchema = new mongoose.Schema({
 
     author: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'user'
     },
-    tittleSpot: {
+    titleSpot: {
         type: String,
         require: true
     },

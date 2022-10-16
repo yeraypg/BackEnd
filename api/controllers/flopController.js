@@ -1,9 +1,12 @@
 const FlopModel = require('../models/spotModel')
+const SpotModel = require('../models/spotModel')
 
 async function createFlop(req, res) {
     try {
-      flop = await FlopModel.create(req.body)
-      res.json(flop)
+      const spot = await SpotModel.findById(req.body.spot)
+        spot.flops.push(req.body)
+        spot.save()
+      res.json(spot)
   } catch (error) {
     console.log(error)
   }
@@ -11,8 +14,8 @@ async function createFlop(req, res) {
 
 async function showOneFlop(req, res) {
     try {
-        const flop = await FlopModel.findById(req.params.flopId, { __v: 0 })
-            .populate('flop', ['titleFlop'])
+        const spot = await SpotModel.findById(req.body.spotId, { __v: 0 })
+        const flop = spot.flops.find(e => e._id == req.params.flopId)
         res.json(flop)
     } catch (error) {
         console.log(error)
@@ -21,9 +24,8 @@ async function showOneFlop(req, res) {
 
 async function showAllFlops(req, res) {
     try {
-        const flops = await FlopModel.find({ __v: 0 })
-            .populate('flop', ['titleFlop'])
-        res.json(flops)
+        const spot = await SpotModel.findById(req.body.spotId, { __v: 0 })
+        res.json(spot.flops)
     } catch (error) {
         console.log(error)
     }
@@ -31,17 +33,23 @@ async function showAllFlops(req, res) {
 
 async function deleteFlop(req, res) {
      try {
-         const delFlop = await FlopModel.findByIdAndDelete(req.params.flopId, req.body)
-         res.json(delFlop)
+         const delSpot = await SpotModel.findById(req.body.spot, { __v: 0 })
+         const index = delSpot.flops.findIndex(e => e._id == req.params.flopId)
+         delSpot.flops.splice(index, 1)
+         delSpot.save()
+         res.json(delSpot)
     } catch (error) {
         console.log(error)
     }
 }
 
 async function updateFlop(req, res) {
-     try {
-         const updaFlop = await FlopModel.findByIdAndUpdate(res.locals.flop.id, req.body, { new: true })
-         res.json(updaFlop)
+    try {
+         const spot = await SpotModel.findById(req.body.spot, { __v: 0 })
+        const index = spot.flops.findIndex(e => e._id == req.params.flopId)
+        spot.flops[index] = req.body
+        spot.save()
+         res.json(spot)
     } catch (error) {
         console.log(error)
     }
