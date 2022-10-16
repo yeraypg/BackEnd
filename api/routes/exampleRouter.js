@@ -15,7 +15,7 @@ const {
 
 router
 
-.post('/', checkAuth, createExmple)
+.post('/', checkAuth, createExample)
 
 .get('/:exampleId', checkAuth, showOneExample)
 .get('/', checkAuth, showAllExamples)

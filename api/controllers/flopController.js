@@ -1,4 +1,4 @@
-const FlopModel = require('../models/flopModel')
+const FlopModel = require('../models/spotModel')
 
 async function createFlop(req, res) {
     try {

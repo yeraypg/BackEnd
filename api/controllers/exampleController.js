@@ -1,4 +1,4 @@
-const ExampleModel = require('../models/exampleModel')
+const ExampleModel = require('../models/spotModel')
 
 async function createExample() {
   try {
@@ -38,4 +38,12 @@ async function updateExample() {
     } catch (error) {
 
     }
+}
+
+module.exports = {
+    showAllExamples,
+    showOneExample,
+    createExample,
+    updateExample,
+    deleteExample,
 }
