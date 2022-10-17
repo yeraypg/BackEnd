@@ -21,7 +21,6 @@ router
 .get('/', checkAuth, showAllFlops )
 
 .patch('/:flopId', checkAuth, updateFlop)
-
-.patch('/:flopId', checkAuth, deleteFlop)
+.patch('/delete/:flopId', checkAuth, deleteFlop)
 
 module.exports = router

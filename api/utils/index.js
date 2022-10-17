@@ -58,6 +58,7 @@ async function upImage(req, res) {
 
 module.exports = {
     checkAuth,
+    checkRolCoach,
     checkRolAdmin,
     upAudio,
     upImage

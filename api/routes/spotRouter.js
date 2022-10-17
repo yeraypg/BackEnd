@@ -2,6 +2,7 @@ const router = require('express').Router()
 
 const {
     checkAuth,
+    checkRolCoach,
     checkRolAdmin,
 } = require('../utils')
 
@@ -12,6 +13,7 @@ const {
     deleteSpot,
     updateSpot,
     shareSpot,
+    unShareSpot
 
 } = require('../controllers/spotController')
 
@@ -22,8 +24,8 @@ router
     .get('/', checkAuth, showAllSpots)
 
     .put('/:spotId', checkAuth, updateSpot)
-
-    .put('/:spotId/sharedUsers', checkAuth, shareSpot)
+    .put('/sharedUsers/:spotId', checkAuth, checkRolCoach, shareSpot)
+    .put('/unSharedUsers/:spotId', checkAuth, checkRolCoach, unShareSpot)
 
     .delete('/:spotId', checkAuth, deleteSpot)
 

@@ -1,4 +1,3 @@
-const { findById, findByIdAndUpdate } = require('../models/spotModel')
 const SpotModel = require('../models/spotModel')
 const UserModel = require('../models/userModel')
 
@@ -28,6 +27,7 @@ async function showOneSpot(req, res) {
 async function showAllSpots(req, res) {
     try {
         userSpots = await UserModel.findById(res.locals.user.id).populate('spot')
+
         res.json(userSpots.spot)
     } catch (error) {
         console.log(error)
@@ -66,12 +66,23 @@ async function updateSpot(req, res) {
 
 async function shareSpot(req, res) {
     try {
-        const spot = await SpotModel.findById(req.params.spotId, { __v: 0 })
-        req.body.spot = req.params.spotId;
-        console.log(req.body)
-        spot.flop.push(req.body)
-        spot.save()
-        res.json(spot)
+        const shareSpot = await SpotModel.findById(req.params.spotId, { __v: 0 })        
+        shareSpot.sharedUsers.push(req.body.userId).save()  
+        const user = await UserModel.findById(req.body.userId)
+        user.sharedSpot.push(req.params.spotId).save()   
+        res.json(shareSpot)
+    } catch (error) {
+        console.log(error)
+    }
+}
+
+async function unShareSpot(req, res) {
+    try {
+        const unShareSpot = await SpotModel.findById(req.params.spotId, { __v: 0 })        
+        unShareSpot.sharedUsers.filter((item) => item !== req.body.userId).save()
+        const user = await UserModel.findById(req.body.userId)
+        user.sharedSpot.filter((item) => item !== req.params.spotId).save()      
+        res.json(unShareSpot)
     } catch (error) {
         console.log(error)
     }
@@ -84,4 +95,5 @@ module.exports = {
     deleteSpot,
     updateSpot,
     shareSpot,
+    unShareSpot
 }
