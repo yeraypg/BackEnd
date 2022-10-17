@@ -7,7 +7,7 @@ async function createExample(req, res) {
         const specificFlop = specificSpot.flops.id(req.body.flopId)
         specificFlop.examples.push(req.body)
         specificSpot.save()
-        res.json(example)
+        res.json(specificFlop.examples)
     } catch (error) {
         console.log(error)
     }
@@ -15,7 +15,9 @@ async function createExample(req, res) {
 
 async function showOneExample(req, res) {
     try {
-        const specificExample = await ExampleModel.findById(req.params.exampleId)
+        const specificSpot = await SpotModel.findById(req.body.spotId)
+        const specificFlop = specificSpot.flops.id(req.body.flopId)
+        const specificExample = specificFlop.examples.id(req.params.exampleId)
         res.json(specificExample)
     } catch (error) {
         console.log(error)
@@ -24,8 +26,9 @@ async function showOneExample(req, res) {
 
 async function showAllExamples(req, res) {
     try {
-        const examples = await ExampleModel.find()
-        res.json(examples)
+        const specificSpot = await SpotModel.findById(req.body.spotId)
+        const specificFlop = specificSpot.flops.id(req.body.flopId)
+        res.json(specificFlop.examples)
     } catch (error) {
         console.log(error)
     }
@@ -33,18 +36,25 @@ async function showAllExamples(req, res) {
 
 async function deleteExample(req, res) {
     try {
-        const deletedExample = await ExampleModel.findByIdAndDelete(req.params.exampleId)
-        res.json(deletedExample)
+      const specificSpot = await SpotModel.findById(req.body.spotId)
+      const specificFlop = specificSpot.flops.id(req.body.flopId)
+      const specificExample = specificFlop.examples.id(req.params.exampleId).remove()
+      specificSpot.save()
+        res.json(specificExample)
     } catch (error) {
         console.log(error)
 
     }
 }
 
-async function updateExample() {
+async function updateExample(req, res) {
     try {
-        const updatedExample = await ExampleModel.findByIdAndUpdate(req.params.exampleId, req.body.params, { new: true })
-        res.json(updatedExample)
+      const specificSpot = await SpotModel.findById(req.body.spotId)
+      const specificFlop = specificSpot.flops.id(req.body.flopId)
+      const specificExample = specificFlop.examples.id(req.params.exampleId)
+      specificExample.set(req.body)
+      specificSpot.save()
+        res.json(specificExample)
     } catch (error) {
         console.log(error)
     }

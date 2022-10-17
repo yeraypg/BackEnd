@@ -1,8 +1,8 @@
 const router = require('express').Router()
 
 const {
-  checkAuth,
-  checkRolAdmin,
+    checkAuth,
+    checkRolAdmin,
 } = require('../utils')
 
 const {
@@ -15,14 +15,13 @@ const {
 
 router
 
-.post('/', checkAuth, createExample)
+    .post('/', checkAuth, createExample)
 
-.get('/:exampleId', checkAuth, showOneExample)
-.get('/', checkAuth, showAllExamples)
+    .get('/:exampleId', checkAuth, showOneExample)
+    .get('/', checkAuth, showAllExamples)
 
-.put('/:exampleId', checkAuth, updateExample)
-
-.delete('/:exampleId', checkAuth, deleteExample)
+    .patch('/:exampleId', checkAuth, updateExample)
+    .patch('/delete/:exampleId', checkAuth, deleteExample)
 
 
 module.exports = router
