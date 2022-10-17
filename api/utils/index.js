@@ -31,7 +31,7 @@ function checkRolAdmin(req, res, next) {
 }
 
 function checkRolCoach(req, res, next) {
-    if (res.locals.user.rol !== 'Coach') {
+    if (res.locals.user.rol !== 'Coach' && res.locals.user.rol !== 'Admin') {
         return res.send('User not authorized')
     }
     return next();

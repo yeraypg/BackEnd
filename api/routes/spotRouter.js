@@ -24,8 +24,8 @@ router
     .get('/', checkAuth, showAllSpots)
 
     .put('/:spotId', checkAuth, updateSpot)
-    .put('/sharedUsers/:spotId', checkAuth, checkRolCoach, shareSpot)
-    .put('/unSharedUsers/:spotId', checkAuth, checkRolCoach, unShareSpot)
+    .put('/shareSpot/:spotId', checkAuth, checkRolCoach, shareSpot)
+    .put('/unShareSpot/:spotId', checkAuth, checkRolCoach, unShareSpot)
 
     .delete('/:spotId', checkAuth, deleteSpot)
 
