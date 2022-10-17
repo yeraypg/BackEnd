@@ -7,7 +7,7 @@ async function createSpot(req, res) {
         spot = await SpotModel.create(req.body)
         user = await UserModel.findById(res.locals.user.id)
         user.spot.push(spot.id)
-        user.save()
+        await user.save()
         res.json(spot)
     } catch (error) {
         console.log(error)
@@ -42,7 +42,7 @@ async function deleteSpot(req, res) {
             const user = await UserModel.findById(res.locals.user.id)
             index = user.spot.indexOf(req.params.spotId)
             user.spot.splice(index, 1)
-            user.save()
+            await user.save()
             const delSpot = await SpotModel.findByIdAndDelete(req.params.spotId)
             res.json(delSpot)
         }
@@ -69,9 +69,9 @@ async function shareSpot(req, res) {
         const shareSpot = await SpotModel.findById(req.params.spotId, { __v: 0 })
         const user = await UserModel.findOne({ email: req.body.email })
         shareSpot.sharedUsers.push(user._id)
-        shareSpot.save()
+        await shareSpot.save()
         user.sharedSpot.push(req.params.spotId)
-        user.save()
+        await user.save()
         res.json(shareSpot)
     } catch (error) {
         console.log(error)
@@ -86,10 +86,10 @@ async function unShareSpot(req, res) {
             const unShareUser = await UserModel.findOne({ email: req.body.email })
             index = unShareSpot.sharedUsers.findIndex(e => e == unShareUser._id)
             unShareSpot.sharedUsers.splice(index, 1)
-            unShareSpot.save()
+            await unShareSpot.save()
             index = unShareUser.sharedSpot.findIndex(e => e == req.params.spotId)
             unShareUser.sharedSpot.splice(index, 1)
-            unShareUser.save()
+            await unShareUser.save()
             res.json(unShareSpot)
         }
         res.json(unShareSpot)

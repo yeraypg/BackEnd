@@ -4,7 +4,7 @@ async function createFlop(req, res) {
     try {
         const spot = await SpotModel.findById(req.body.spot)
         spot.flops.push(req.body)
-        spot.save()
+        await spot.save()
         res.json(spot)
     } catch (error) {
         console.log(error)
@@ -34,7 +34,7 @@ async function deleteFlop(req, res) {
     try {
         const delSpot = await SpotModel.findById(req.body.spot, { __v: 0 })
         const delFlop = delSpot.flops.id(req.params.flopId).remove()
-        delSpot.save()
+        await delSpot.save()
         res.json(delSpot)
     } catch (error) {
         console.log(error)
@@ -46,7 +46,7 @@ async function updateFlop(req, res) {
         const spot = await SpotModel.findById(req.body.spot, { __v: 0 })
         const updateFlop = spot.flops.id(req.params.flopId)
         updateFlop.set(req.body)
-        spot.save()
+        await spot.save()
         res.json(spot)
     } catch (error) {
         console.log(error)
