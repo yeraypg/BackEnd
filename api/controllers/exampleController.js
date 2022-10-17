@@ -1,49 +1,59 @@
-const ExampleModel = require('../models/spotModel')
+const SpotModel = require('../models/spotModel')
 
-async function createExample() {
-  try {
 
-  } catch (error) {
-
-  }
-}
-
-async function showOneExample() {
+async function createExample(req, res) {
     try {
-
+        const specificSpot = await SpotModel.findById(req.body.spotId)
+        const specificFlop = specificSpot.flops.id(req.body.flopId)
+        specificFlop.examples.push(req.body)
+        specificSpot.save()
+        res.json(example)
     } catch (error) {
-
+        console.log(error)
     }
 }
 
-async function showAllExamples() {
+async function showOneExample(req, res) {
     try {
-
+        const specificExample = await ExampleModel.findById(req.params.exampleId)
+        res.json(specificExample)
     } catch (error) {
-
+        console.log(error)
     }
 }
 
-async function deleteExample() {
-     try {
-
+async function showAllExamples(req, res) {
+    try {
+        const examples = await ExampleModel.find()
+        res.json(examples)
     } catch (error) {
+        console.log(error)
+    }
+}
+
+async function deleteExample(req, res) {
+    try {
+        const deletedExample = await ExampleModel.findByIdAndDelete(req.params.exampleId)
+        res.json(deletedExample)
+    } catch (error) {
+        console.log(error)
 
     }
 }
 
 async function updateExample() {
-     try {
-
+    try {
+        const updatedExample = await ExampleModel.findByIdAndUpdate(req.params.exampleId, req.body.params, { new: true })
+        res.json(updatedExample)
     } catch (error) {
-
+        console.log(error)
     }
 }
 
 module.exports = {
-    showAllExamples,
-    showOneExample,
     createExample,
-    updateExample,
+    showOneExample,
+    showAllExamples,
     deleteExample,
+    updateExample
 }
