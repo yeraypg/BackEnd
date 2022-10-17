@@ -66,8 +66,8 @@ async function updateSpot(req, res) {
 
 async function shareSpot(req, res) {
     try {
-        const shareSpot = await SpotModel.findById(req.params.spotId, { __v: 0 })          
-        const user = await UserModel.findOne({email: req.body.email})        
+        const shareSpot = await SpotModel.findById(req.params.spotId, { __v: 0 })
+        const user = await UserModel.findOne({ email: req.body.email })
         shareSpot.sharedUsers.push(user._id)
         shareSpot.save()
         user.sharedSpot.push(req.params.spotId)
@@ -80,15 +80,15 @@ async function shareSpot(req, res) {
 
 async function unShareSpot(req, res) {
     try {
-        const unShareSpot = await SpotModel.findById(req.params.spotId, { __v: 0 })               
+        const unShareSpot = await SpotModel.findById(req.params.spotId, { __v: 0 })
         if (unShareSpot.author != res.locals.user.id) { res.send("You haven´t rights to modify this spot") }
         else {
-            const unShareUser = await UserModel.findOne({email: req.body.email})
+            const unShareUser = await UserModel.findOne({ email: req.body.email })
             index = unShareSpot.sharedUsers.findIndex(e => e == unShareUser._id)
             unShareSpot.sharedUsers.splice(index, 1)
             unShareSpot.save()
             index = unShareUser.sharedSpot.findIndex(e => e == req.params.spotId)
-            unShareUser.sharedSpot.splice(index,1)
+            unShareUser.sharedSpot.splice(index, 1)
             unShareUser.save()
             res.json(unShareSpot)
         }

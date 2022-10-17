@@ -7,7 +7,7 @@ async function createExample(req, res) {
         const specificFlop = specificSpot.flops.id(req.body.flopId)
         specificFlop.examples.push(req.body)
         specificSpot.save()
-        res.json(example)
+        res.json(specificFlop.examples)
     } catch (error) {
         console.log(error)
     }
