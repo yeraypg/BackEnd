@@ -20,9 +20,8 @@ router
     .get('/:exampleId', checkAuth, showOneExample)
     .get('/', checkAuth, showAllExamples)
 
-    .put('/:exampleId', checkAuth, updateExample)
-
-    .delete('/:exampleId', checkAuth, deleteExample)
+    .patch('/:exampleId', checkAuth, updateExample)
+    .patch('/delete/:exampleId', checkAuth, deleteExample)
 
 
 module.exports = router
