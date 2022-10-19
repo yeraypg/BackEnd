@@ -8,7 +8,7 @@ async function singup(req, res) {
         const user = await UserModel.create(req.body)
         const payload = { email: user.email }
         const token = jwt.sign(payload, process.env.SECRET, { expiresIn: '1h' })
-        res.status(200).json({ email: user.email, rol: user.rol, token: token })
+        res.status(200).json({ email: user.email, userId: user.id, rol: user.rol, token: token })
 
     } catch (error) {
         console.log(error)
@@ -26,7 +26,7 @@ async function login(req, res) {
         })
         const payload = { email: user.email }
         const token = jwt.sign(payload, process.env.SECRET, { expiresIn: '1h' })
-        res.status(200).json({ email: user.email, rol: user.rol, token: token })
+        res.status(200).json({ email: user.email, userId: user.id, rol: user.rol, token: token })
     } catch (error) {
         console.log(error)
     }
