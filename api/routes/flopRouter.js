@@ -1,26 +1,26 @@
 const router = require('express').Router()
 
 const {
-  checkAuth,
-  checkRolAdmin,
+    checkAuth,
+    checkRolAdmin,
 } = require('../utils')
 
 const {
-  showOneFlop,
-  showAllFlops,
-  createFlop,
-  updateFlop,
-  deleteFlop,
+    showOneFlop,
+    showAllFlops,
+    createFlop,
+    updateFlop,
+    deleteFlop,
 } = require('../controllers/flopController')
 
 router
 
-.post('/', checkAuth, createFlop)
+    .post('/', checkAuth, createFlop)
 
-.get('/:flopId', checkAuth, showOneFlop)
-.get('/', checkAuth, showAllFlops )
+    .get('/:flopId', checkAuth, showOneFlop)
+    .get('/', checkAuth, showAllFlops)
 
-.patch('/:flopId', checkAuth, updateFlop)
-.patch('/delete/:flopId', checkAuth, deleteFlop)
+    .patch('/:flopId', checkAuth, updateFlop)
+    .patch('/delete/:flopId', checkAuth, deleteFlop)
 
 module.exports = router

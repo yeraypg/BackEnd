@@ -19,7 +19,7 @@ const exampleSchema = new mongoose.Schema({
     {
         timestamps: {
             createdAt: true,
-            updatedAt: false
+            updatedAt: true
         }
     })
 
@@ -33,9 +33,9 @@ const flopSchema = new mongoose.Schema({
         type: String,
         require: true
     },
-    image: [{
+    image: {
         type: String
-    }],
+    },
     theory: {
         type: String
     },
@@ -50,7 +50,7 @@ const flopSchema = new mongoose.Schema({
     {
         timestamps: {
             createdAt: true,
-            updatedAt: false
+            updatedAt: true
         }
     });
 
@@ -87,7 +87,7 @@ const spotSchema = new mongoose.Schema({
     {
         timestamps: {
             createdAt: true,
-            updatedAt: false
+            updatedAt: true
         }
     }
 )

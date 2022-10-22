@@ -25,8 +25,8 @@ async function showOneExample(req, res) {
 
 async function showAllExamples(req, res) {
     try {
-        const specificSpot = await SpotModel.findById(req.body.spotId)
-        const specificFlop = specificSpot.flops.id(req.body.flopId)
+        const specificSpot = await SpotModel.findById(req.headers.spotid)
+        const specificFlop = specificSpot.flops.id(req.headers.flopid)
         res.json(specificFlop.examples)
     } catch (error) {
         console.log(error)
