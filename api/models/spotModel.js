@@ -1,7 +1,8 @@
 const mongoose = require('mongoose')
 
 const exampleSchema = new mongoose.Schema({
-    date: Date,
+    spotId: mongoose.Types.ObjectId,
+    flopId: mongoose.Types.ObjectId,
     text: {
         type: String
     },
@@ -24,7 +25,7 @@ const exampleSchema = new mongoose.Schema({
 
 const flopSchema = new mongoose.Schema({
 
-    spot: {
+    spotId: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'spot'
     },
