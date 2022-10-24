@@ -27,7 +27,6 @@ async function showOneSpot(req, res) {
 async function showAllSpots(req, res) {
     try {
         userSpots = await UserModel.findById(res.locals.user.id).populate('spot')
-
         res.json(userSpots.spot)
     } catch (error) {
         console.log(error)

@@ -16,7 +16,6 @@ async function showOneFlop(req, res) {
         console.log(req.headers)
         const spot = await SpotModel.findById(req.headers.spotid, { __v: 0 })
         const flop = spot.flops.id(req.params.flopId)
-        console.log(flop)
         res.json(flop)
     } catch (error) {
         console.log(error)
