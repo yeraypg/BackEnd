@@ -58,13 +58,13 @@ DELETE | /user/:ID        | YES   | A   | Delete user by ID        |            
   
 METHOD | ENDPOINT         | TOKEN | ROL | DESCRIPTION              | POST PARAMS                                     | RETURNS
 -------|------------------|-------|-----|--------------------------|-------------------------------------------------|--------------------
-GET    | /spot            | YES   | A   | View all spots           | -                                               | List of all spots 
+GET    | /spot            | YES   | A   | View all Spots           | -                                               | List of all spots 
 GET    | /spot/allUserSpots | YES | U   | View all User Spots      | userId                                          | List of all user spots 
 GET    | /spot/:ID        | YES   | U   | View one spot by ID      | userId                                          | one spot
+POST   | /spot            | YES   | U   | Create new spot          | title, type                                     | created spot 
 PUT    | /spot/sharedUsers | YES  | C   | Shared one spot          | email                                           | Updated spot
 PUT    | /spot/:ID        | YES   | U   | Update one spot by ID    | title, type, theory, exploit                    | Updated spot
 DELETE | /spot/:ID        | YES   | U   | Delete one spot by ID    | userId                                          | Spot deletion confirmation
-POST   | /spot            | YES   | U   | Create new spot          | title, type                                     | created spot 
   
 </p></details>  
   
@@ -73,13 +73,11 @@ POST   | /spot            | YES   | U   | Create new spot          | title, type
   
 METHOD | ENDPOINT         | TOKEN | ROL | DESCRIPTION              | POST PARAMS                                     | RETURNS
 -------|------------------|-------|-----|--------------------------|-------------------------------------------------|--------------------
-GET    | /spot            | YES   | A   | View all spots           | -                                               | List of all spots 
-GET    | /spot/allUserSpots | YES | U   | View all User Spots      | userId                                          | List of all user spots 
-GET    | /spot/:ID        | YES   | U   | View one spot by ID      | userId                                          | one spot
-PUT    | /spot/sharedUsers | YES  | C   | Shared one spot          | email                                           | Updated spot
-PUT    | /spot/:ID        | YES   | U   | Update one spot by ID    | title, type, theory, exploit                    | Updated spot
-DELETE | /spot/:ID        | YES   | U   | Delete one spot by ID    | userId                                          | Spot deletion confirmation
-POST   | /spot            | YES   | U   | Create new spot          | title, type                                     | created spot 
+GET    | /flop/allUserFlops | YES | U   | View all User Flops      | userId                                          | List of all user flops 
+GET    | /flop/:ID        | YES   | U   | View one Flop by ID      | userId                                          | one flop
+POST   | /flop            | YES   | U   | Create new Flop          | title, theory, exploit, audio, image            | created flop
+PUT    | /flop/:ID        | YES   | U   | Update one Flop by ID    | title, theory, exploit, audio, image            | Updated flop
+DELETE | /flop/:ID        | YES   | U   | Delete one Flop by ID    | userId                                          | Flop deletion confirmation 
   
 </p></details>
 
@@ -88,12 +86,10 @@ POST   | /spot            | YES   | U   | Create new spot          | title, type
   
 METHOD | ENDPOINT         | TOKEN | ROL | DESCRIPTION              | POST PARAMS                                     | RETURNS
 -------|------------------|-------|-----|--------------------------|-------------------------------------------------|--------------------
-GET    | /spot            | YES   | A   | View all spots           | -                                               | List of all spots 
-GET    | /spot/allUserSpots | YES | U   | View all User Spots      | userId                                          | List of all user spots 
-GET    | /spot/:ID        | YES   | U   | View one spot by ID      | userId                                          | one spot
-PUT    | /spot/sharedUsers | YES  | C   | Shared one spot          | email                                           | Updated spot
-PUT    | /spot/:ID        | YES   | U   | Update one spot by ID    | title, type, theory, exploit                    | Updated spot
-DELETE | /spot/:ID        | YES   | U   | Delete one spot by ID    | userId                                          | Spot deletion confirmation
-POST   | /spot            | YES   | U   | Create new spot          | title, type                                     | created spot 
+GET    | /example/allUserExample | YES | U   | View all User example | userId                                        | List of all user example 
+GET    | /example/:ID     | YES   | U   | View one example by ID   | userId                                          | one example
+POST   | /example         | YES   | U   | Create new example       | text, imageBoard, imageHud, audio               | created example 
+PUT    | /example/:ID     | YES   | U   | Update one example by ID | text, imageBoard, imageHud, audio               | Updated example
+DELETE | /example/:ID     | YES   | U   | Delete one example by ID | userId                                          | Example deletion confirmation
   
 </p></details>
