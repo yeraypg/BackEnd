@@ -1,4 +1,5 @@
 const express = require('express')
+const fileUpload = require('express-fileupload')
 const mongoose = require('mongoose')
 const morgan = require('morgan')
 const cors = require('cors')
@@ -21,6 +22,7 @@ cloudinary.config({
     console.log('Connected to DB')
 
     app
+    .use(fileUpload())
     .use(cors('*'))
     .use(morgan('dev'))
     .use(express.json())

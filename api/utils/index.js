@@ -1,4 +1,5 @@
 const jwt = require('jsonwebtoken')
+const fs = require('fs')
 const UserModel = require('../models/userModel')
 const cloudinary = require('cloudinary').v2
 
@@ -37,19 +38,59 @@ function checkRolCoach(req, res, next) {
     return next();
 }
 
-async function upAudio(req, res) {
+async function uploadImage(req, res, next) {
     try {
-        const uploadaudio = await cloudinary.uploader.upload(req.body.audio, { resource_type: "raw" })
-        res.json(uploadResult.url)
+        const uploadImageFile = await req.files.imageFile        
+        uploadImageFile.mv(`./api/uploads/${uploadImageFilie.name}`,err => {    
+            if(err) return res.status(500).send({ message : err })  
+            })
+            res.locals.imageFile = uploadImageFile.name    
+        return next();
     } catch (error) {
         console.log(error)
     }
 }
 
-async function upImage(req, res) {
+async function uploadAudio(req, res, next) {
     try {
-        const uploadResult = await cloudinary.uploader.upload(req.body.image)
-        res.json(uploadResult.url)
+        const uploadAudioFile = await req.files.audioFile        
+        uploadAudioFile.mv(`./api/uploads/${uploadAudioFile.name}`,err => {    
+            if(err) return res.status(500).send({ message : err })            
+            })
+        res.locals.audioFile = uploadAudioFile.name      
+        return next();
+    } catch (error) {
+        console.log(error)
+    }
+}
+
+async function upCloudAudio(req, res) {
+    try {
+        const uploadAudio = await cloudinary.uploader.upload(`./api/uploads/${res.locals.audioFile}`, { resource_type: "raw" })
+        if (uploadAudio) {
+            try {
+                fs.unlinkSync(`./api/uploads/${res.locals.audioFile}`)
+            } catch(err) {
+            console.error('Something wrong happened removing the file', err)
+          }
+        }        
+        res.json(uploadAudio.url)
+    } catch (error) {
+        console.log(error)
+    }
+}
+
+async function upCloudImage(req, res) {
+    try {        
+        const uploadImage = await cloudinary.uploader.upload(`./api/uploads/file.${res.locals.imageFile}`)
+        if (uploadImage) {
+            try {
+                fs.unlinkSync(`./api/uploads/file.${res.locals.imageFile}`)
+            } catch(err) {
+            console.error('Something wrong happened removing the file', err)
+          }
+        }        
+        res.json(uploadImage.url)
 
     } catch (error) {
         console.log(error)
@@ -60,6 +101,8 @@ module.exports = {
     checkAuth,
     checkRolCoach,
     checkRolAdmin,
-    upAudio,
-    upImage
+    uploadImage,
+    uploadAudio,
+    upCloudAudio,
+    upCloudImage,
 }
