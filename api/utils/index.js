@@ -41,7 +41,7 @@ function checkRolCoach(req, res, next) {
 async function uploadImage(req, res, next) {
     try {
         const uploadImageFile = await req.files.imageFile        
-        uploadImageFile.mv(`./api/uploads/${uploadImageFilie.name}`,err => {    
+        uploadImageFile.mv(`./api/uploads/${uploadImageFile.name}`,err => {    
             if(err) return res.status(500).send({ message : err })  
             })
             res.locals.imageFile = uploadImageFile.name    
