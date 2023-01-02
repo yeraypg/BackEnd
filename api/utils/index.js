@@ -40,11 +40,12 @@ function checkRolCoach(req, res, next) {
 
 async function uploadImage(req, res, next) {
     try {
-        const uploadImageFile = await req.files.imageFile        
+        const uploadImageFile = await req.files.imageFile     
+           
         uploadImageFile.mv(`./api/uploads/${uploadImageFile.name}`,err => {    
             if(err) return res.status(500).send({ message : err })  
-            })
-            res.locals.imageFile = uploadImageFile.name    
+            })        
+        res.locals.imageFile = uploadImageFile.name    
         return next();
     } catch (error) {
         console.log(error)
@@ -81,11 +82,11 @@ async function upCloudAudio(req, res) {
 }
 
 async function upCloudImage(req, res) {
-    try {        
-        const uploadImage = await cloudinary.uploader.upload(`./api/uploads/file.${res.locals.imageFile}`)
+    try {   
+        const uploadImage = await cloudinary.uploader.upload(`./api/uploads/${res.locals.imageFile}`)
         if (uploadImage) {
             try {
-                fs.unlinkSync(`./api/uploads/file.${res.locals.imageFile}`)
+                fs.unlinkSync(`./api/uploads/${res.locals.imageFile}`)
             } catch(err) {
             console.error('Something wrong happened removing the file', err)
           }
